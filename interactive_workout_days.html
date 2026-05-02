@@ -1,0 +1,239 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.wrap{padding:1rem 0;direction:rtl;font-family:var(--font-sans);}
+.days-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem;}
+.day-btn{
+  background:var(--color-background-primary);
+  border:0.5px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-lg);
+  padding:18px 16px;
+  cursor:pointer;
+  text-align:right;
+  transition:border-color 0.15s;
+}
+.day-btn:hover{border-color:var(--color-border-secondary);}
+.day-btn.upper{border-top:2px solid #378ADD;border-radius:0;border-radius:var(--border-radius-lg);}
+.day-btn.leg{border-top:2px solid #639922;border-radius:var(--border-radius-lg);}
+.day-btn .day-label{font-size:11px;color:var(--color-text-tertiary);margin-bottom:4px;}
+.day-btn .day-name{font-size:15px;font-weight:500;color:var(--color-text-primary);}
+.day-btn .day-sub{font-size:12px;color:var(--color-text-secondary);margin-top:2px;}
+
+.detail{display:none;}
+.detail.active{display:block;}
+
+.back-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;color:var(--color-text-secondary);
+  background:none;border:0.5px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-md);
+  padding:6px 12px;cursor:pointer;margin-bottom:1rem;
+}
+.back-btn:hover{background:var(--color-background-secondary);}
+
+.detail-header{
+  border-radius:var(--border-radius-lg);
+  padding:16px 18px;
+  margin-bottom:12px;
+  border:0.5px solid var(--color-border-tertiary);
+  background:var(--color-background-primary);
+}
+.detail-header .type-badge{
+  font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;
+  display:inline-block;margin-bottom:8px;
+}
+.badge-upper-style{background:#E6F1FB;color:#0C447C;}
+.badge-leg-style{background:#EAF3DE;color:#27500A;}
+.detail-header h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px;}
+.detail-header p{font-size:13px;color:var(--color-text-secondary);}
+
+.section-label{
+  font-size:11px;font-weight:500;color:var(--color-text-tertiary);
+  letter-spacing:0.06em;text-transform:uppercase;
+  margin:1.2rem 0 0.5rem;
+  padding-bottom:5px;border-bottom:0.5px solid var(--color-border-tertiary);
+}
+.core-card{
+  background:var(--color-background-secondary);
+  border-radius:var(--border-radius-md);
+  padding:10px 14px;margin-bottom:4px;
+}
+.core-card p{font-size:13px;color:var(--color-text-primary);line-height:1.6;}
+.core-card .sets{font-size:12px;color:var(--color-text-secondary);margin-top:2px;}
+
+.ex-list{list-style:none;}
+.ex-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:8px 0;border-bottom:0.5px solid var(--color-border-tertiary);
+}
+.ex-item:last-child{border-bottom:none;}
+.ex-num{
+  flex-shrink:0;width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:500;
+  background:var(--color-background-secondary);color:var(--color-text-secondary);
+  margin-top:1px;
+}
+.ex-name{font-size:14px;color:var(--color-text-primary);line-height:1.4;}
+.ex-en{font-size:12px;color:var(--color-text-secondary);}
+.ex-cardio .ex-name{color:#185FA5;font-weight:500;}
+.ex-cardio .ex-num{background:#E6F1FB;color:#0C447C;}
+
+.sets-footer{
+  margin-top:14px;padding:10px 14px;
+  background:var(--color-background-secondary);
+  border-radius:var(--border-radius-md);
+  font-size:12px;color:var(--color-text-secondary);
+  display:flex;gap:16px;flex-wrap:wrap;
+}
+.sets-footer span{display:flex;align-items:center;gap:4px;}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.dot-blue{background:#378ADD;}
+.dot-green{background:#639922;}
+</style>
+
+<div class="wrap">
+
+<div id="home">
+  <div class="days-grid">
+    <div class="day-btn upper" onclick="show('d1')">
+      <div class="day-label">اليوم الأول</div>
+      <div class="day-name">Upper 1</div>
+      <div class="day-sub">صدر · ظهر · كتف · باي · تراي</div>
+    </div>
+    <div class="day-btn leg" onclick="show('d2')">
+      <div class="day-label">اليوم الثاني</div>
+      <div class="day-name">Leg 1</div>
+      <div class="day-sub">أرجل · hip thrusters · سمانة</div>
+    </div>
+    <div class="day-btn upper" onclick="show('d3')">
+      <div class="day-label">اليوم الثالث</div>
+      <div class="day-name">Upper 2</div>
+      <div class="day-sub">صدر · ظهر · كتف · باي · تراي</div>
+    </div>
+    <div class="day-btn leg" onclick="show('d4')">
+      <div class="day-label">اليوم الرابع</div>
+      <div class="day-name">Leg 2</div>
+      <div class="day-sub">سكواد · ديدليفت · أمامية · خلفية</div>
+    </div>
+  </div>
+</div>
+
+<div id="d1" class="detail">
+  <button class="back-btn" onclick="goHome()">&#8592; رجوع</button>
+  <div class="detail-header">
+    <span class="type-badge badge-upper-style">Upper 1</span>
+    <h2>اليوم الأول</h2>
+    <p>صدر · ظهر · كتف · باي · تراي</p>
+  </div>
+  <div class="section-label">Core — قبل التمرين</div>
+  <div class="core-card"><p>Plank</p><div class="sets">3 مجاميع × 1 دقيقة</div></div>
+  <div class="core-card"><p>Cable Woodchop</p><div class="sets">3 مجاميع × 15 عدة</div></div>
+  <div class="section-label">Circuit</div>
+  <ul class="ex-list">
+    <li class="ex-item"><div class="ex-num">1</div><div><div class="ex-name">صدر فلات دمبل</div><div class="ex-en">Flat Dumbbell Press</div></div></li>
+    <li class="ex-item"><div class="ex-num">2</div><div><div class="ex-name">سحب عالي ظهر</div><div class="ex-en">Lat Pulldown</div></div></li>
+    <li class="ex-item"><div class="ex-num">3</div><div><div class="ex-name">رفرفة جانبي كتف</div><div class="ex-en">Lateral Raise</div></div></li>
+    <li class="ex-item"><div class="ex-num">4</div><div><div class="ex-name">باي بالبار</div><div class="ex-en">Barbell Bicep Curl</div></div></li>
+    <li class="ex-item"><div class="ex-num">5</div><div><div class="ex-name">تراي بالبار نايم</div><div class="ex-en">Skull Crushers</div></div></li>
+    <li class="ex-item ex-cardio"><div class="ex-num">6</div><div><div class="ex-name">دقيقة سبرينت على الماشية</div><div class="ex-en">Treadmill Sprint</div></div></li>
+  </ul>
+  <div class="sets-footer">
+    <span><div class="dot dot-blue"></div>4 مجاميع × 15 عدة</span>
+    <span><div class="dot dot-blue"></div>راحة دقيقتين بين المجاميع</span>
+    <span><div class="dot dot-blue"></div>circuit كامل ورا بعض</span>
+  </div>
+</div>
+
+<div id="d2" class="detail">
+  <button class="back-btn" onclick="goHome()">&#8592; رجوع</button>
+  <div class="detail-header">
+    <span class="type-badge badge-leg-style">Leg 1</span>
+    <h2>اليوم الثاني</h2>
+    <p>أرجل · hip thrusters · سمانة</p>
+  </div>
+  <div class="section-label">Core — قبل التمرين</div>
+  <div class="core-card"><p>Dead Bug</p><div class="sets">3 مجاميع × 15 عدة</div></div>
+  <div class="core-card"><p>Side Plank</p><div class="sets">3 مجاميع × 1 دقيقة</div></div>
+  <div class="section-label">Circuit</div>
+  <ul class="ex-list">
+    <li class="ex-item"><div class="ex-num">1</div><div><div class="ex-name">جهاز الدفع</div><div class="ex-en">Leg Press</div></div></li>
+    <li class="ex-item"><div class="ex-num">2</div><div><div class="ex-name">جهاز الخلفية</div><div class="ex-en">Leg Curl</div></div></li>
+    <li class="ex-item"><div class="ex-num">3</div><div><div class="ex-name">طعن برجل واحدة</div><div class="ex-en">Single Leg Lunge</div></div></li>
+    <li class="ex-item"><div class="ex-num">4</div><div><div class="ex-name">Hip Thrusters</div><div class="ex-en">Hip Thrusters</div></div></li>
+    <li class="ex-item"><div class="ex-num">5</div><div><div class="ex-name">سمانة</div><div class="ex-en">Calf Raise</div></div></li>
+    <li class="ex-item ex-cardio"><div class="ex-num">6</div><div><div class="ex-name">دقيقة على ARG</div><div class="ex-en">ARG Machine</div></div></li>
+  </ul>
+  <div class="sets-footer">
+    <span><div class="dot dot-green"></div>4 مجاميع × 15 عدة</span>
+    <span><div class="dot dot-green"></div>راحة دقيقتين بين المجاميع</span>
+    <span><div class="dot dot-green"></div>circuit كامل ورا بعض</span>
+  </div>
+</div>
+
+<div id="d3" class="detail">
+  <button class="back-btn" onclick="goHome()">&#8592; رجوع</button>
+  <div class="detail-header">
+    <span class="type-badge badge-upper-style">Upper 2</span>
+    <h2>اليوم الثالث</h2>
+    <p>صدر · ظهر · كتف · باي · تراي</p>
+  </div>
+  <div class="section-label">Core — قبل التمرين</div>
+  <div class="core-card"><p>Plank</p><div class="sets">3 مجاميع × 1 دقيقة</div></div>
+  <div class="core-card"><p>Cable Woodchop</p><div class="sets">3 مجاميع × 15 عدة</div></div>
+  <div class="section-label">Circuit</div>
+  <ul class="ex-list">
+    <li class="ex-item"><div class="ex-num">1</div><div><div class="ex-name">صدر عالي بالبار</div><div class="ex-en">Incline Barbell Press</div></div></li>
+    <li class="ex-item"><div class="ex-num">2</div><div><div class="ex-name">طرمبة واسع ظهر</div><div class="ex-en">Wide Grip Pulldown</div></div></li>
+    <li class="ex-item"><div class="ex-num">3</div><div><div class="ex-name">جهاز الكتف جانبي</div><div class="ex-en">Lateral Raise Machine</div></div></li>
+    <li class="ex-item"><div class="ex-num">4</div><div><div class="ex-name">مسطرة من تحت باي</div><div class="ex-en">Underhand Cable Curl</div></div></li>
+    <li class="ex-item"><div class="ex-num">5</div><div><div class="ex-name">مسطرة من فوق تراي</div><div class="ex-en">Overhead Tricep Extension</div></div></li>
+    <li class="ex-item ex-cardio"><div class="ex-num">6</div><div><div class="ex-name">دقيقة سبرينت على الماشية</div><div class="ex-en">Treadmill Sprint</div></div></li>
+  </ul>
+  <div class="sets-footer">
+    <span><div class="dot dot-blue"></div>4 مجاميع × 15 عدة</span>
+    <span><div class="dot dot-blue"></div>راحة دقيقتين بين المجاميع</span>
+    <span><div class="dot dot-blue"></div>circuit كامل ورا بعض</span>
+  </div>
+</div>
+
+<div id="d4" class="detail">
+  <button class="back-btn" onclick="goHome()">&#8592; رجوع</button>
+  <div class="detail-header">
+    <span class="type-badge badge-leg-style">Leg 2</span>
+    <h2>اليوم الرابع</h2>
+    <p>سكواد · ديدليفت · أمامية · خلفية · ضمة</p>
+  </div>
+  <div class="section-label">Core — قبل التمرين</div>
+  <div class="core-card"><p>Dead Bug</p><div class="sets">3 مجاميع × 15 عدة</div></div>
+  <div class="core-card"><p>Side Plank</p><div class="sets">3 مجاميع × 1 دقيقة</div></div>
+  <div class="section-label">Circuit</div>
+  <ul class="ex-list">
+    <li class="ex-item"><div class="ex-num">1</div><div><div class="ex-name">أسكواد</div><div class="ex-en">Squat</div></div></li>
+    <li class="ex-item"><div class="ex-num">2</div><div><div class="ex-name">ديدليفت</div><div class="ex-en">Deadlift</div></div></li>
+    <li class="ex-item"><div class="ex-num">3</div><div><div class="ex-name">جهاز الأمامية</div><div class="ex-en">Leg Extension</div></div></li>
+    <li class="ex-item"><div class="ex-num">4</div><div><div class="ex-name">جهاز الخلفية</div><div class="ex-en">Leg Curl</div></div></li>
+    <li class="ex-item"><div class="ex-num">5</div><div><div class="ex-name">ضمة</div><div class="ex-en">Adductor Machine</div></div></li>
+    <li class="ex-item"><div class="ex-num">6</div><div><div class="ex-name">سمانة قاعد</div><div class="ex-en">Seated Calf Raise</div></div></li>
+    <li class="ex-item ex-cardio"><div class="ex-num">7</div><div><div class="ex-name">دقيقة على ARG</div><div class="ex-en">ARG Machine</div></div></li>
+  </ul>
+  <div class="sets-footer">
+    <span><div class="dot dot-green"></div>4 مجاميع × 15 عدة</span>
+    <span><div class="dot dot-green"></div>راحة دقيقتين بين المجاميع</span>
+    <span><div class="dot dot-green"></div>circuit كامل ورا بعض</span>
+  </div>
+</div>
+
+</div>
+
+<script>
+function show(id){
+  document.getElementById('home').style.display='none';
+  document.querySelectorAll('.detail').forEach(function(el){el.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+}
+function goHome(){
+  document.getElementById('home').style.display='block';
+  document.querySelectorAll('.detail').forEach(function(el){el.classList.remove('active');});
+}
+</script>
